@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_dashboard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e2124">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="32dp"
+        android:text="Smarty Home"
+        android:textColor="#cab2fb"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Sensor buttons 2x2 grid centered -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- First row: Light and Temperature -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <com.kauan.proj_lvb_dankau.SensorButtonView
+                android:id="@+id/btn_light"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <com.kauan.proj_lvb_dankau.SensorButtonView
+                android:id="@+id/btn_temp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <!-- Second row: Humidity and Flask (All) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.kauan.proj_lvb_dankau.SensorButtonView
+                android:id="@+id/btn_hum"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <com.kauan.proj_lvb_dankau.FlaskButtonView
+                android:id="@+id/btn_flask"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Bottom nav buttons side by side at bottom-center -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_back_dashboard"
+            android:text="← Log In"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp" />
+
+        <Button
+            android:id="@+id/btn_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_settings_dashboard"
+            android:text="Settings ⚙"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp" />
+
+    </LinearLayout>
+
+</FrameLayout>

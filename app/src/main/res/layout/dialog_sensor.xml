@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_sensor_bg"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Corner decorations are drawn via background drawable -->
+
+    <!-- Sensor title -->
+    <TextView
+        android:id="@+id/tv_sensor_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Current value -->
+    <TextView
+        android:id="@+id/tv_sensor_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Chart container -->
+    <FrameLayout
+        android:id="@+id/chart_container"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/chart_area_bg"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Close button -->
+    <Button
+        android:id="@+id/btn_close_sensor"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_close_sensor"
+        android:text="✕ Close"
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif-medium" />
+
+</LinearLayout>

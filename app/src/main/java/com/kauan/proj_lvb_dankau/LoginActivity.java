@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnCreateAccount;
     private boolean isPasswordVisible = false;
 
-    // Cute emotes for success
     private final String[] successEmotes = {"⭐", "😊", "💜", "✨", "🌸", "💫", "🎀", "🌟"};
 
     @Override
@@ -51,19 +49,19 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         btnCreateAccount = findViewById(R.id.btn_create_account);
 
-        // Toggle password visibility
+        etEmail.setHintTextColor(Color.parseColor("#c0aab0"));
+        etPassword.setHintTextColor(Color.parseColor("#c0aab0"));
+
         btnTogglePassword.setOnClickListener(v -> {
             animatePress(v);
             togglePassword();
         });
 
-        // Login button
         btnLogin.setOnClickListener(v -> {
             animatePress(v);
             new Handler().postDelayed(this::attemptLogin, 150);
         });
 
-        // Create account button
         btnCreateAccount.setOnClickListener(v -> {
             animatePress(v);
             new Handler().postDelayed(() -> {
@@ -76,17 +74,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void togglePassword() {
         if (isPasswordVisible) {
-            // Hide password
             etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             btnTogglePassword.setImageResource(R.drawable.ic_eye_closed);
             isPasswordVisible = false;
         } else {
-            // Show password
             etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             btnTogglePassword.setImageResource(R.drawable.ic_eye_open);
             isPasswordVisible = true;
         }
-        // Keep cursor at end
         etPassword.setSelection(etPassword.getText().length());
     }
 
@@ -104,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Read accounts from JSON file
         try {
             File file = new File(getFilesDir(), "accounts.json");
             if (!file.exists()) {
@@ -135,11 +129,10 @@ public class LoginActivity extends AppCompatActivity {
             if (found) {
                 showSuccessEmote();
                 new Handler().postDelayed(() -> {
-                    // TODO: Navigate to your main screen
-                    Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show();
-                    // Intent intent = new Intent(this, MainActivity.class);
-                    // startActivity(intent);
-                    // finish();
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }, 800);
             } else {
                 showErrorPopup("Incorrect email or password. Please try again.");
@@ -167,7 +160,6 @@ public class LoginActivity extends AppCompatActivity {
         );
         rootLayout.addView(emoteView, params);
 
-        // Animate: scale in + fade out
         emoteView.setScaleX(0f);
         emoteView.setScaleY(0f);
         emoteView.setAlpha(1f);
@@ -182,12 +174,8 @@ public class LoginActivity extends AppCompatActivity {
         set.setDuration(350);
         set.setInterpolator(new OvershootInterpolator());
         set.start();
-        new Handler().postDelayed(() ->
-                fadeOut.start(), 350
-        );
-        new Handler().postDelayed(() ->
-                rootLayout.removeView(emoteView), 900
-        );
+        new Handler().postDelayed(() -> fadeOut.start(), 350);
+        new Handler().postDelayed(() -> rootLayout.removeView(emoteView), 900);
     }
 
     private void showErrorPopup(String message) {
@@ -200,9 +188,6 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView tvMessage = dialog.findViewById(R.id.tv_error_message);
         Button btnClose = dialog.findViewById(R.id.btn_close);
-
-        etEmail.setHintTextColor(Color.parseColor("#c0aab0"));
-        etPassword.setHintTextColor(Color.parseColor("#c0aab0"));
 
         tvMessage.setText(message);
 
