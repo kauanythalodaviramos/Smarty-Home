@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Eye closed icon (password hidden) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Slash line across the eye -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#cab2fb"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M2,2 L22,22" />
+
+    <!-- Upper eyelid arc -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#cab2fb"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M6.71,6.71 C4.22,8.13 2,11 2,11 C2,11 5.27,15.11 9.53,16.76" />
+
+    <!-- Lower eyelid arc -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#cab2fb"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M14,14.35 C13.37,14.76 12.71,15 12,15 C10.34,15 9,13.66 9,12 C9,11.29 9.24,10.63 9.65,10.1" />
+
+    <!-- Right side arc -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#cab2fb"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M14.53,9.47 C15.9,9.93 17.27,10.86 18.47,12.06 C19.1,12.7 19.61,13.35 20,13.88" />
+
+    <!-- Dashed partial arc right top -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#cab2fb"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M17.74,6.71 C22,8.13 22,11 22,11 C22,11 20.36,13.19 17.74,14.59" />
+
+</vector>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This acts as the soft-shadow outline around the card.
+     It is placed behind card_background and is slightly larger,
+     using a semi-transparent #cab2fb to create the glow effect.
+     Android's elevation (set on the parent LinearLayout in XML) adds
+     a material shadow; this layer adds the colored outer glow. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Transparent fill — the glow is on the stroke -->
+    <solid android:color="#00000000" />
+
+    <!-- Soft outer glow using the purple at 40% opacity -->
+    <stroke
+        android:width="6dp"
+        android:color="#66cab2fb" />
+
+    <corners android:radius="20dp" />
+
+    <padding
+        android:bottom="4dp"
+        android:left="4dp"
+        android:right="4dp"
+        android:top="4dp" />
+
+</shape>
