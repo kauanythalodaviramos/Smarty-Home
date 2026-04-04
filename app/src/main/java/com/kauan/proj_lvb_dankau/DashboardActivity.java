@@ -28,6 +28,12 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,18 +42,22 @@ public class DashboardActivity extends AppCompatActivity {
     private SensorButtonView btnLight, btnTemp, btnHum;
     private FlaskButtonView btnFlask;
     private Button btnBack, btnSettings;
+    private View rootDashboard;
     private Handler handler = new Handler();
     private Runnable updateRunnable;
 
     private float currentLight = 0f;
     private float currentTemp = 0f;
     private float currentHum = 0f;
+    private String currentUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        currentUserEmail = getSharedPreferences("app_prefs", MODE_PRIVATE).getString("current_user", "");
+        rootDashboard = findViewById(R.id.root_dashboard);
         btnLight = findViewById(R.id.btn_light);
         btnTemp = findViewById(R.id.btn_temp);
         btnHum = findViewById(R.id.btn_hum);
@@ -92,10 +102,54 @@ public class DashboardActivity extends AppCompatActivity {
             }, 150);
         });
 
-        btnSettings.setOnClickListener(v -> animatePress(v));
+        btnSettings.setOnClickListener(v -> {
+            animatePress(v);
+            new Handler().postDelayed(() -> {
+                Intent intent = new Intent(DashboardActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }, 150);
+        });
 
         // Start live data updates
         startDataUpdates();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        applyTheme();
+    }
+
+    private void applyTheme() {
+        try {
+            File file = new File(getFilesDir(), "accounts.json");
+            if (!file.exists()) return;
+
+            FileInputStream fis = new FileInputStream(file);
+            InputStreamReader reader = new InputStreamReader(fis);
+            StringBuilder sb = new StringBuilder();
+            char[] buffer = new char[1024];
+            int len;
+            while ((len = reader.read(buffer)) != -1) sb.append(buffer, 0, len);
+            reader.close();
+
+            JSONArray accounts = new JSONArray(sb.toString());
+            for (int i = 0; i < accounts.length(); i++) {
+                JSONObject acc = accounts.getJSONObject(i);
+                if (acc.getString("email").equalsIgnoreCase(currentUserEmail)) {
+                    boolean isDarkMode = acc.optBoolean("dark_mode", true);
+                    if (isDarkMode) {
+                        rootDashboard.setBackgroundColor(Color.parseColor("#1e2124"));
+                    } else {
+                        rootDashboard.setBackgroundColor(Color.parseColor("#f0f0f0"));
+                    }
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void startDataUpdates() {
