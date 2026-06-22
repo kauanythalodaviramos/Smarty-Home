@@ -95,7 +95,7 @@ Feel free to open an [issue](https://github.com/kauanythalodaviramos/Smarty-Home
 
 ## 👩‍💻 Author
 
-**Kauany Thaloda Viramos**
+**Charlotte**
 - GitHub: [@kauanythalodaviramos](https://github.com/kauanythalodaviramos)
 
 ---
